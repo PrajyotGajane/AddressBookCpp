@@ -43,11 +43,103 @@ void AddressBookActions::displayContacts()
 {
     for (auto contact_pointers = contact_list.begin(); contact_pointers != contact_list.end(); ++contact_pointers)
     {
-        cout << "\nName: " << (*contact_pointers)->getFirstName() << " " << (*contact_pointers)->getlastName() << endl;
-        cout << "Address: " << (*contact_pointers)->getAddress() << endl;
-        cout << "City: " << (*contact_pointers)->getCity() << endl;
-        cout << "State: " << (*contact_pointers)->getState() << endl;
-        cout << "Zipcode: " << (*contact_pointers)->getZipcode() << endl;
-        cout << "Phone Number: " << (*contact_pointers)->getPhoneNumber() << endl;
+        (*contact_pointers)->display();
     }
+}
+
+void AddressBookActions::editContact(string name)
+{
+    Person* edit_person = findContact(name);
+    bool endLoop = true;
+    int breakLoop = 2;
+    do
+    {
+        int choice;
+        cout << "Edit : \n1: Address 2: City 3: State 4: Zipcode 5: Phone number" << endl;
+        cout << "Your input: " << endl;
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+        {
+            cout << "Current Address: " << (edit_person)->getAddress() << endl;
+            cout << "New Address: " << endl;
+            string address;
+            cin.ignore();
+            getline(cin, address);
+            (edit_person)->setAddress(address);
+            cout << "Updated address: " << (edit_person)->getAddress() << endl;
+        }
+        break;
+        case 2:
+        {
+            cout << "Current city: " << (edit_person)->getCity() << endl;
+            cout << "New City: " << endl;
+            string city;
+            cin >> city;
+            (edit_person)->setCity(city);
+            cout << "Updated city: " << (edit_person)->getCity() << endl;
+        }
+        break;
+        case 3:
+        {
+            cout << "Current state: " << (edit_person)->getState() << endl;
+            cout << "New state: " << endl;
+            string state;
+            cin >> state;
+            (edit_person)->setState(state);
+            cout << "Updated state: " << (edit_person)->getState() << endl;
+        }
+        break;
+        case 4:
+        {
+            cout << "Current zipcode: " << (edit_person)->getZipcode() << endl;
+            cout << "New zipcode: " << endl;
+            int zip_code;
+            cin >> zip_code;
+            (edit_person)->setZipcode(zip_code);
+            cout << "Updated Zipcode: " << (edit_person)->getZipcode() << endl;
+        }
+        break;
+        case 5:
+        {
+            cout << "Current Phone number: " << (edit_person)->getPhoneNumber() << endl;
+            cout << "New Phone number: " << endl;
+            long long phone_number;
+            cin >> phone_number;
+            (edit_person)->setPhoneNumber(phone_number);
+            cout << "Updated Phone Number: " << (edit_person)->getPhoneNumber() << endl;
+        }
+        break;
+        default:
+            cout << "Invalid Input" << endl;
+            break;
+        }
+        cout << "Do you want edit more info: 1:Yes 2:No " << endl;
+        int secondChoice;
+        cin >> secondChoice;
+        if (secondChoice == breakLoop)
+        {
+            endLoop = false;
+        }
+    } while (endLoop);
+}
+
+Person * AddressBookActions::findContact(string name)
+{
+    bool foundFlag = false;
+    for (auto contact_pointers = contact_list.begin(); contact_pointers != contact_list.end(); ++contact_pointers)
+    {
+        string checkName = (*contact_pointers)->getFirstName() + " " + (*contact_pointers)->getlastName();
+        if (checkName == name)
+        {
+            foundFlag = true;
+            return *contact_pointers;
+        }
+    }
+    if (!foundFlag)
+    {
+        cout << "Contact doesn't exist" << endl;
+    }
+    return nullptr;
 }

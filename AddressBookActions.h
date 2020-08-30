@@ -1,8 +1,11 @@
 #pragma once
-
-class AddressBookActions{
-    public:
+#include "Person.h"
+class AddressBookActions
+{
+public:
     AddressBookActions();
     void addContact();
     void displayContacts();
+    void editContact(string name);
+    Person * findContact(string name);
 };

@@ -11,7 +11,7 @@ void performActions()
     while (endLoop)
     {
         int choice;
-        cout << "\n1: Add contact 2: Display Contacts" << endl;
+        cout << "\n1: Add contact 2: Display Contacts 3:Edit info 9:Exit" << endl;
         cin >> choice;
         switch (choice)
         {
@@ -20,7 +20,21 @@ void performActions()
             break;
         case 2:
             actionObject.displayContacts();
+            break;
+        case 3:
+        {
+            cout << "Enter the name of the contact you want to edit" << endl;
+            string name;
+            cin.ignore();
+            getline(cin, name);
+            actionObject.editContact(name);
+        }
+        break;
+        case 9:
+            endLoop = false;
+            break;
         default:
+            cout << "Invalid Input" << endl;
             break;
         }
     }
