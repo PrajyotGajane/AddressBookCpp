@@ -13,11 +13,30 @@ Person::Person(string first_name, string last_name, string address, string city,
     this->phone_number = phone_number;
 }
 
-void Person::display(){
-    cout <<  "Name: " << this->first_name << " " << this->last_name <<
-            "\nAddress: " << this->address <<
-            "\nCity: " << this->city <<
-            "\nState: " << this->state <<
-            "\nZipcode: " << this->zip_code <<
-            "\nPhone Number: " << this->phone_number << endl;
+string Person::getFirstName(){
+    return this->first_name;
+}
+
+string Person::getlastName(){
+    return this->last_name;
+}
+
+string Person::getAddress(){
+    return this->address;
+}
+
+string Person::getCity(){
+    return this->city;
+}
+
+string Person::getState(){
+    return this->state;
+}
+
+int Person::getZipcode(){
+    return this->zip_code;
+}
+
+long long Person::getPhoneNumber(){
+    return this->phone_number;
 }
