@@ -41,15 +41,17 @@ void AddressBookActions::addContact()
 
 void AddressBookActions::displayContacts()
 {
+    cout << "\n\n" << endl;
     for (auto contact_pointers = contact_list.begin(); contact_pointers != contact_list.end(); ++contact_pointers)
-    {
+    {   
+        cout << "\n" << endl;
         (*contact_pointers)->display();
     }
 }
 
 void AddressBookActions::editContact(string name)
 {
-    Person* edit_person = findContact(name);
+    Person *edit_person = findContact(name);
     bool endLoop = true;
     int breakLoop = 2;
     do
@@ -125,7 +127,7 @@ void AddressBookActions::editContact(string name)
     } while (endLoop);
 }
 
-Person * AddressBookActions::findContact(string name)
+Person *AddressBookActions::findContact(string name)
 {
     bool foundFlag = false;
     for (auto contact_pointers = contact_list.begin(); contact_pointers != contact_list.end(); ++contact_pointers)
@@ -142,4 +144,14 @@ Person * AddressBookActions::findContact(string name)
         cout << "Contact doesn't exist" << endl;
     }
     return nullptr;
+}
+
+void AddressBookActions::deleteContact(string name)
+{
+    Person *delete_person = findContact(name);
+    contact_list.remove(delete_person);
+    if (contact_list.size() <= 0)
+        cout << "No contacts in the address book" << endl;
+    else
+        displayContacts();
 }

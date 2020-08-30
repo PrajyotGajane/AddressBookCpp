@@ -11,7 +11,7 @@ void performActions()
     while (endLoop)
     {
         int choice;
-        cout << "\n1: Add contact 2: Display Contacts 3:Edit info 9:Exit" << endl;
+        cout << "\n1: Add contact 2: Display Contacts 3:Edit info 4: Delete contact    9:Exit" << endl;
         cin >> choice;
         switch (choice)
         {
@@ -28,6 +28,15 @@ void performActions()
             cin.ignore();
             getline(cin, name);
             actionObject.editContact(name);
+        }
+        break;
+        case 4:
+        {
+            cout << "Enter the name of the contact you want to edit" << endl;
+            string name;
+            cin.ignore();
+            getline(cin, name);
+            actionObject.deleteContact(name);
         }
         break;
         case 9:
