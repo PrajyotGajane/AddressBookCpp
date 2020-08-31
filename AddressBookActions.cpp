@@ -185,14 +185,73 @@ struct compareByNames
     }
 };
 
-void AddressBookActions::sortByName()
+struct compareByCity
+{
+    bool operator()(Person *toCompare, Person *toCompareWith)
+    {
+        return toCompare->getCity() < toCompareWith->getCity();
+    }
+};
+
+struct compareByState
+{
+    bool operator()(Person *toCompare, Person *toCompareWith)
+    {
+        return toCompare->getState() < toCompareWith->getState();
+    }
+};
+
+struct compareByZipcode
+{
+    
+    bool operator()(Person *toCompare, Person *toCompareWith)
+    {
+        return toCompare->getZipcode() < toCompareWith->getZipcode();
+    }
+};
+
+void
+AddressBookActions::sortByName()
 {
     contact_list.sort(compareByNames());
 }
 
+void AddressBookActions::sortByCity()
+{
+    contact_list.sort(compareByCity());
+}
+
+void AddressBookActions::sortByState()
+{
+    contact_list.sort(compareByState());
+}
+
+void AddressBookActions::sortByZipcode()
+{
+    contact_list.sort(compareByZipcode());
+}
+
 void AddressBookActions::chooseSort()
 {
-    cout << "1: By Name" << endl;
-    sortByName();
+    cout << "1: By Name 2: By City 3: By State: 4: By Zipcode" << endl;
+    int choice;
+    cin >> choice;
+    switch (choice)
+    {
+    case 1:
+        sortByName();
+        break;
+    case 2:
+        sortByCity();
+        break;
+    case 3:
+        sortByState();
+        break;
+    case 4:
+        sortByZipcode();
+        break;
+    default:
+        break;
+    }
     displayContacts();
 }

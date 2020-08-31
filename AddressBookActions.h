@@ -12,4 +12,7 @@ public:
     bool duplicateContact(string);
     void sortByName();
     void chooseSort();
+    void sortByCity();
+    void sortByState();
+    void sortByZipcode();
 };
