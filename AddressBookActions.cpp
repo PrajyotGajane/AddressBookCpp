@@ -19,11 +19,14 @@ void AddressBookActions::addContact()
     string state;
     int zip_code;
     long long phone_number;
+    bool duplicate = false;
     Person *person;
     cout << "Enter First Name: " << endl;
     cin >> first_name;
     cout << "Enter Last Name: " << endl;
     cin >> last_name;
+    if (duplicate == duplicateContact(first_name + " " + last_name))
+        return;
     cin.ignore();
     cout << "Enter Address: " << endl;
     getline(cin, address);
@@ -41,10 +44,12 @@ void AddressBookActions::addContact()
 
 void AddressBookActions::displayContacts()
 {
-    cout << "\n\n" << endl;
+    cout << "\n\n"
+         << endl;
     for (auto contact_pointers = contact_list.begin(); contact_pointers != contact_list.end(); ++contact_pointers)
-    {   
-        cout << "\n" << endl;
+    {
+        cout << "\n"
+             << endl;
         (*contact_pointers)->display();
     }
 }
@@ -139,11 +144,21 @@ Person *AddressBookActions::findContact(string name)
             return *contact_pointers;
         }
     }
-    if (!foundFlag)
-    {
-        cout << "Contact doesn't exist" << endl;
-    }
     return nullptr;
+}
+
+bool AddressBookActions::duplicateContact(string name)
+{
+    Person *duplicate_person = findContact(name);
+    if (duplicate_person == nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        cout << "Contact already exists" << endl;
+        return false;
+    }
 }
 
 void AddressBookActions::deleteContact(string name)

@@ -9,4 +9,5 @@ public:
     void editContact(string name);
     Person * findContact(string name);
     void deleteContact(string name);
+    bool duplicateContact(string);
 };
