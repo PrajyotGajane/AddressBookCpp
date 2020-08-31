@@ -11,7 +11,8 @@ void performActions()
     while (endLoop)
     {
         int choice;
-        cout << "\n1: Add contact 2: Display Contacts 3:Edit info 4: Delete contact 5: Sort 6:View  9:Exit" << endl;
+        cout << "=====================================Main Menu=========================================" << endl;
+        cout << "\n1: Add contact 2: Display Contacts 3:Edit info 4: Delete contact 5: Sort 6: View 7: Search 9:Exit" << endl;
         cin >> choice;
         switch (choice)
         {
@@ -45,6 +46,9 @@ void performActions()
         case 6:
             actionObject.chooseView();
         break;
+        case 7:
+            actionObject.searchBy();
+            break;
         case 9:
             endLoop = false;
             break;

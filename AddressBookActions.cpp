@@ -47,8 +47,8 @@ void AddressBookActions::addContact()
     person = new Person(first_name, last_name, address, city, state, zip_code, phone_number);
     contact_list.push_back(person);
     string complete_name = first_name + " " + last_name;
-    mapCity.insert(pair<string, string>(city, complete_name));
-    mapState.insert(pair<string, string>(state, complete_name));
+    mapCity.insert(pair<string, string>(complete_name, city));
+    mapState.insert(pair<string, string>(complete_name, state));
 }
 
 void AddressBookActions::displayContacts()
@@ -265,7 +265,7 @@ void AddressBookActions::chooseSort()
 
 void viewByCity()
 {
-    cout << "State" << '\t' << "Contact" << endl;
+    cout << "Contact" << "\t\t" << "City" << endl;
     for (auto key = mapCity.begin(); key != mapCity.end(); ++key)
     {
         cout << key->first
@@ -275,7 +275,7 @@ void viewByCity()
 
 void viewByState()
 {
-    cout << "State" << '\t' << "Contact" << endl;
+    cout << "Contact" << "\t\t" << "State" << endl;
     for (auto key = mapState.begin(); key != mapState.end(); ++key)
     {
         cout << key->first
@@ -295,6 +295,56 @@ void AddressBookActions::chooseView()
         break;
     case 2:
         viewByState();
+        break;
+    default:
+        break;
+    }
+}
+
+void searchByCity()
+{
+    cout << "Enter the name of the city" << endl;
+    string city;
+    cin >> city;
+    cout << "Contact" << "\t\t" << "City" << endl;
+    for (auto key = mapCity.begin(); key != mapCity.end(); ++key)
+    {
+        if (key->second == city)
+        {
+            cout << key->first
+                 << '\t' << key->second << '\n';
+        }
+    }
+}
+
+void searchState()
+{
+    cout << "Enter the name of the stete" << endl;
+    string state;
+    cin >> state;
+    cout << "Contact" << "\t\t" << "State" << endl;
+    for (auto key = mapState.begin(); key != mapState.end(); ++key)
+    {
+        if (key->second == state)
+        {
+            cout << key->first
+                 << '\t' << key->second << '\n';
+        }
+    }
+}
+
+void AddressBookActions::searchBy()
+{
+    cout << "1: By City 2: By State" << endl;
+    int choice;
+    cin >> choice;
+    switch (choice)
+    {
+    case 1:
+        searchByCity();
+        break;
+    case 2:
+        searchState();
         break;
     default:
         break;

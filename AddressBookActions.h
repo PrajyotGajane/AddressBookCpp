@@ -16,4 +16,5 @@ public:
     void sortByState();
     void sortByZipcode();
     void chooseView();
+    void searchBy();
 };
