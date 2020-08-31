@@ -3,11 +3,16 @@
 #include <string>
 #include <list>
 #include <algorithm>
+#include <map>
+
 #include "AddressBookActions.h"
 #include "Person.h"
 using namespace std;
 
 list<Person *> contact_list;
+
+map<string, string> mapCity;
+map<string, string> mapState;
 
 AddressBookActions::AddressBookActions() {}
 
@@ -41,6 +46,9 @@ void AddressBookActions::addContact()
     cin >> phone_number;
     person = new Person(first_name, last_name, address, city, state, zip_code, phone_number);
     contact_list.push_back(person);
+    string complete_name = first_name + " " + last_name;
+    mapCity.insert(pair<string, string>(city, complete_name));
+    mapState.insert(pair<string, string>(state, complete_name));
 }
 
 void AddressBookActions::displayContacts()
@@ -203,15 +211,14 @@ struct compareByState
 
 struct compareByZipcode
 {
-    
+
     bool operator()(Person *toCompare, Person *toCompareWith)
     {
         return toCompare->getZipcode() < toCompareWith->getZipcode();
     }
 };
 
-void
-AddressBookActions::sortByName()
+void AddressBookActions::sortByName()
 {
     contact_list.sort(compareByNames());
 }
@@ -254,4 +261,42 @@ void AddressBookActions::chooseSort()
         break;
     }
     displayContacts();
+}
+
+void viewByCity()
+{
+    cout << "State" << '\t' << "Contact" << endl;
+    for (auto key = mapCity.begin(); key != mapCity.end(); ++key)
+    {
+        cout << key->first
+             << '\t' << key->second << '\n';
+    }
+}
+
+void viewByState()
+{
+    cout << "State" << '\t' << "Contact" << endl;
+    for (auto key = mapState.begin(); key != mapState.end(); ++key)
+    {
+        cout << key->first
+             << '\t' << key->second << '\n';
+    }
+}
+
+void AddressBookActions::chooseView()
+{
+    cout << "1: By City 2: By State" << endl;
+    int choice;
+    cin >> choice;
+    switch (choice)
+    {
+    case 1:
+        viewByCity();
+        break;
+    case 2:
+        viewByState();
+        break;
+    default:
+        break;
+    }
 }
