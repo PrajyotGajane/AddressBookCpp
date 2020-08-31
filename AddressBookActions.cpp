@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <algorithm>
 #include "AddressBookActions.h"
 #include "Person.h"
 using namespace std;
@@ -169,4 +170,29 @@ void AddressBookActions::deleteContact(string name)
         cout << "No contacts in the address book" << endl;
     else
         displayContacts();
+}
+
+bool compareNames(Person *personOne, Person *personTwo)
+{
+    return (personOne->getFirstName() < personTwo->getFirstName());
+}
+
+struct compareByNames
+{
+    bool operator()(Person *toCompare, Person *toCompareWith)
+    {
+        return toCompare->getFirstName() < toCompareWith->getFirstName();
+    }
+};
+
+void AddressBookActions::sortByName()
+{
+    contact_list.sort(compareByNames());
+}
+
+void AddressBookActions::chooseSort()
+{
+    cout << "1: By Name" << endl;
+    sortByName();
+    displayContacts();
 }

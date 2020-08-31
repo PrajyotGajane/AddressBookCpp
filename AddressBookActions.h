@@ -10,4 +10,6 @@ public:
     Person * findContact(string name);
     void deleteContact(string name);
     bool duplicateContact(string);
+    void sortByName();
+    void chooseSort();
 };
